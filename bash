@@ -1,32 +1,14 @@
-#!/bin/bash
+# Initialize a Git repository in your project directory
+git init
 
-# Define the directory and file names
-PROJECT_DIR="smart_irrigation_system"
-HTML_FILE="index.html"
-CSS_FILE="styles.css"
-JS_FILE="scripts.js"
+# Add all files to the repository
+git add .
 
-# Create the project directory
-mkdir -p "$PROJECT_DIR"
+# Commit the files
+git commit -m "Initial commit - Added HTML, CSS, and JavaScript for Smart Irrigation System webpage"
 
-# Create HTML file
-cat <<EOL > "$PROJECT_DIR/$HTML_FILE"
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Irrigation System</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Smart Irrigation System</h1>
-    </header>
+# Link to the remote repository (replace with your GitHub repo URL)
+git remote add origin https://github.com/yourusername/smart-irrigation-system-webpage.git
 
-    <main>
-        <section id="input-section">
-            <h2>Enter Input Data</h2>
-            <form id="irrigation-form">
-                <label for="soil-moisture">Soil Moisture (%)</label>
-                <input type="number" id="soil-moisture" name="soil
+# Push the changes to GitHub
+git push -u origin master
