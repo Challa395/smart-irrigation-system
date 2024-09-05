@@ -1,61 +1,47 @@
-document.getElementById("irrigationForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+function calculate() {
+    const soilMoisture = document.getElementById('soil-moisture').value;
+    const cropType = document.getElementById('crop-type').value;
+    const weather = document.getElementById('weather').value;
+    const area = document.getElementById('area').value;
 
-  // Input values
-  const soilMoisture = parseFloat(document.getElementById("soilMoisture").value);
-  const cropType = document.getElementById("cropType").value;
-  const weatherCondition = document.getElementById("weatherCondition").value;
-  const area = parseFloat(document.getElementById("area").value);
-
-  let irrigationNeeded = false;
-  let waterAmount = 0;
-
-  // Logic for determining irrigation
-  if (soilMoisture < 50) {  // If soil moisture is below 50%, irrigation is needed
-    irrigationNeeded = true;
-
-    // Water amount based on crop type and area
-    switch (cropType) {
-      case "wheat": waterAmount = 0.6; break;
-      case "corn": waterAmount = 0.8; break;
-      case "rice": waterAmount = 1.0; break;
-      case "soybean": waterAmount = 0.7; break;
-      case "cotton": waterAmount = 0.9; break;
-      case "barley": waterAmount = 0.65; break;
-      case "oats": waterAmount = 0.6; break;
-      case "sunflower": waterAmount = 0.75; break;
-      case "potato": waterAmount = 1.2; break;
-      case "sugarcane": waterAmount = 1.5; break;
+    if (soilMoisture === '' || area === '') {
+        alert('Please fill out all the fields.');
+        return;
     }
 
-    // Weather adjustment
-    switch (weatherCondition) {
-      case "rainy":
-        waterAmount *= 0.5;
-        break;
-      case "mostlyCloudy":
-        waterAmount *= 0.75;
-        break;
-      case "slightlySunny":
-        waterAmount *= 1.0;
-        break;
-      case "sunny":
-        waterAmount *= 1.25;
-        break;
-      case "stormy":
-        waterAmount *= 0.25;
-        break;
+    const cropWaterRequirement = {
+        wheat: 1.2,
+        corn: 1.5,
+        rice: 2.0,
+        cotton: 1.4,
+        soybean: 1.3,
+        potato: 1.1,
+        sugarcane: 2.5,
+        tomato: 1.0,
+        barley: 1.2,
+        sorghum: 1.3
+    };
+
+    const weatherMultiplier = {
+        sunny: 1.2,
+        cloudy: 1.0,
+        rainy: 0.8
+    };
+
+    let irrigationNeeded = false;
+    if (soilMoisture < 50) {
+        irrigationNeeded = true;
     }
 
-    // Calculate total water amount based on area
-    waterAmount = waterAmount * area;
-  }
+    const waterRequirementPerSqFt = cropWaterRequirement[cropType] * weatherMultiplier[weather];
+    const totalWaterRequired = (waterRequirementPerSqFt * area).toFixed(2);
 
-  // Display the result
-  const resultDiv = document.getElementById("result");
-  if (irrigationNeeded) {
-    resultDiv.innerHTML = <p>Irrigation is needed. Use <strong>${waterAmount.toFixed(2)} liters</strong> of water for the area.</p>;
-  } else {
-    resultDiv.innerHTML = "<p>No irrigation needed at this time.</p>";
-  }
-});
+    let resultText = '';
+    if (irrigationNeeded) {
+        resultText = Irrigation is needed. Use approximately ${totalWaterRequired} liters of water.;
+    } else {
+        resultText = 'Irrigation is not needed at the moment.';
+    }
+
+    document.getElementById('result').innerHTML = resultText;
+}
