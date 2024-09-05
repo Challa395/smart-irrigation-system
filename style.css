@@ -75,6 +75,7 @@ button:hover {
     background: #e9ecef;
     border: 1px solid #ced4da;
     border-radius: 5px;
+    color: #333;
 }
 
 /* Responsive Design */
