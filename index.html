@@ -1,48 +1,50 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Irrigation System</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to the CSS file -->
-    <script defer src="script.js"></script>  <!-- Link to the JavaScript file -->
+    <title>Smart Irrigation Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Smart Irrigation Calculator</h1>
+    <form id="irrigationForm">
+        <label for="soilMoisture">Current Soil Moisture Level (%):</label>
+        <input type="number" id="soilMoisture" name="soilMoisture" step="0.1" required><br><br>
 
-<header>
-    <h1>Smart Irrigation System: Problem Statement</h1>
-</header>
+        <label for="cropType">Crop Type:</label>
+        <select id="cropType" name="cropType">
+            <option value="corn">Corn</option>
+            <option value="wheat">Wheat</option>
+        </select><br><br>
 
-<section>
-    <h2>Problem Statement</h2>
-    <p>Monitoring & Management of rate of water, soil fertility, crop growth, pest & diseases, macro & micro-nutrients, etc. using IoT, AI & ML and applications of sensors.</p>
-</section>
+        <label for="cropWaterRequirement">Crop Water Requirement (mm/day):</label>
+        <input type="number" id="cropWaterRequirement" name="cropWaterRequirement" step="0.1" required><br><br>
 
-<section>
-    <h2>Challenge Description</h2>
-    <p>The technology can help improve efficiency of water usage in agriculture and finds application in open farms, greenhouses, gardening, and research and agricultural labs. It can help with guidance about ways to optimize water usage as per the requirement of crops and soil.</p>
-    <p>In case of limited water resources, farmers can detect and limit watering to only a critical phase of the crop cycle, thus not affecting overall yield.</p>
-</section>
+        <label for="fieldSize">Field Size (hectares):</label>
+        <input type="number" id="fieldSize" name="fieldSize" step="0.01" required><br><br>
 
-<section>
-    <h2>Expected Outcome</h2>
-    <p>Development of an indigenous system to track the water, soil fertility, crop growth, and other parameters using IoT, AI & ML and sensors to improve agricultural efficiency.</p>
-</section>
+        <label for="evapotranspiration">Evapotranspiration (ET) (mm/day):</label>
+        <input type="number" id="evapotranspiration" name="evapotranspiration" step="0.1" required><br><br>
 
-<!-- Interactive Section: Soil Moisture Monitoring -->
-<section>
-    <h2>Soil Moisture Monitoring</h2>
-    <p>Enter the current soil moisture level (0 - 100):</p>
-    <input type="number" id="moistureInput" placeholder="Soil Moisture %" min="0" max="100">
-    <button onclick="checkSoilMoisture()">Check Moisture</button>
-    <p id="result"></p> <!-- The result will be displayed here -->
-</section>
+        <label for="soilType">Soil Type:</label>
+        <select id="soilType" name="soilType">
+            <option value="loamy">Loamy</option>
+            <option value="sandy">Sandy</option>
+            <option value="clay">Clay</option>
+        </select><br><br>
 
-<!-- Display the current date and time dynamically -->
-<section>
-    <h2>Current Date and Time</h2>
-    <p id="dateTime"></p>
-</section>
+        <label for="irrigationEfficiency">Irrigation System Efficiency (%):</label>
+        <input type="number" id="irrigationEfficiency" name="irrigationEfficiency" step="0.1" required><br><br>
 
+        <label for="recentRainfall">Recent Rainfall (mm):</label>
+        <input type="number" id="recentRainfall" name="recentRainfall" step="0.1" required><br><br>
+
+        <button type="button" onclick="calculateIrrigation()">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
