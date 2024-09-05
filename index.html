@@ -1,52 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Irrigation System</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
     <h1>Smart Irrigation System for Precision Farming</h1>
+    
+    <div id="input-form">
+        <label for="soil-moisture">Soil Moisture Level (%):</label>
+        <input type="number" id="soil-moisture" name="soil-moisture" min="0" max="100">
+        
+        <label for="crop-type">Select Crop Type:</label>
+        <select id="crop-type" name="crop-type">
+            <option value="wheat">Wheat</option>
+            <option value="corn">Corn</option>
+            <option value="rice">Rice</option>
+            <option value="cotton">Cotton</option>
+            <option value="soybean">Soybean</option>
+            <option value="potato">Potato</option>
+            <option value="sugarcane">Sugarcane</option>
+            <option value="tomato">Tomato</option>
+            <option value="barley">Barley</option>
+            <option value="sorghum">Sorghum</option>
+        </select>
+        
+        <label for="weather">Weather Condition:</label>
+        <select id="weather" name="weather">
+            <option value="sunny">Sunny</option>
+            <option value="cloudy">Cloudy</option>
+            <option value="rainy">Rainy</option>
+        </select>
 
-    <form id="irrigationForm">
-      <!-- Input fields -->
-      <label for="soilMoisture">Soil Moisture Level (%):</label>
-      <input type="number" id="soilMoisture" name="soilMoisture" min="0" max="100" required><br>
+        <label for="area">Area (Square Feet):</label>
+        <input type="number" id="area" name="area" min="1">
 
-      <label for="cropType">Crop Type:</label>
-      <select id="cropType" name="cropType">
-        <option value="wheat">Wheat</option>
-        <option value="corn">Corn</option>
-        <option value="rice">Rice</option>
-        <option value="soybean">Soybean</option>
-        <option value="cotton">Cotton</option>
-        <option value="barley">Barley</option>
-        <option value="oats">Oats</option>
-        <option value="sunflower">Sunflower</option>
-        <option value="potato">Potato</option>
-        <option value="sugarcane">Sugarcane</option>
-      </select><br>
-
-      <label for="weatherCondition">Weather Condition:</label>
-      <select id="weatherCondition" name="weatherCondition">
-        <option value="slightlySunny">Slightly Sunny</option>
-        <option value="mostlyCloudy">Mostly Cloudy</option>
-        <option value="rainy">Rainy</option>
-        <option value="sunny">Sunny</option>
-        <option value="stormy">Stormy</option>
-      </select><br>
-
-      <label for="area">Area (Square Feet):</label>
-      <input type="number" id="area" name="area" required><br>
-
-      <button type="submit">Check Irrigation Status</button>
-    </form>
+        <button onclick="calculate()">Calculate Irrigation</button>
+    </div>
 
     <div id="result"></div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
