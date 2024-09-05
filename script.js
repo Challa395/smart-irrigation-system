@@ -1,34 +1,43 @@
 function calculateIrrigation() {
-    // Gather input values
-    const soilMoisture = parseFloat(document.getElementById('soilMoisture').value);
-    const cropWaterRequirement = parseFloat(document.getElementById('cropWaterRequirement').value);
-    const fieldSize = parseFloat(document.getElementById('fieldSize').value);
-    const evapotranspiration = parseFloat(document.getElementById('evapotranspiration').value);
-    const irrigationEfficiency = parseFloat(document.getElementById('irrigationEfficiency').value) / 100;
-    const recentRainfall = parseFloat(document.getElementById('recentRainfall').value);
+    try {
+        // Gather input values
+        const soilMoisture = parseFloat(document.getElementById('soilMoisture').value);
+        const cropWaterRequirement = parseFloat(document.getElementById('cropWaterRequirement').value);
+        const fieldSize = parseFloat(document.getElementById('fieldSize').value);
+        const evapotranspiration = parseFloat(document.getElementById('evapotranspiration').value);
+        const irrigationEfficiency = parseFloat(document.getElementById('irrigationEfficiency').value) / 100;
+        const recentRainfall = parseFloat(document.getElementById('recentRainfall').value);
 
-    // Constants
-    const desiredMoistureLevel = 30; // desired moisture level in percentage
+        // Ensure all inputs are valid numbers
+        if (isNaN(soilMoisture) || isNaN(cropWaterRequirement) || isNaN(fieldSize) || isNaN(evapotranspiration) || isNaN(irrigationEfficiency) || isNaN(recentRainfall)) {
+            throw new Error("Please enter valid numbers for all fields.");
+        }
 
-    // Calculate water deficit
-    const waterDeficit = Math.max(0, desiredMoistureLevel - soilMoisture);
-    const waterDeficitMm = waterDeficit * 100; // Convert percentage to mm (assuming a depth of 100 mm)
+        // Constants
+        const desiredMoistureLevel = 30; // desired moisture level in percentage
 
-    // Calculate total water needed
-    const totalWaterNeeded = cropWaterRequirement + evapotranspiration - recentRainfall;
+        // Calculate water deficit
+        const waterDeficit = Math.max(0, desiredMoistureLevel - soilMoisture);
+        const waterDeficitMm = waterDeficit * 100; // Convert percentage to mm (assuming a depth of 100 mm)
 
-    // Adjust for irrigation system efficiency
-    const effectiveWaterRequirement = totalWaterNeeded / irrigationEfficiency;
+        // Calculate total water needed
+        const totalWaterNeeded = cropWaterRequirement + evapotranspiration - recentRainfall;
 
-    // Calculate total volume needed
-    const volumeNeeded = fieldSize * effectiveWaterRequirement;
+        // Adjust for irrigation system efficiency
+        const effectiveWaterRequirement = totalWaterNeeded / irrigationEfficiency;
 
-    // Display results
-    document.getElementById('result').innerHTML = `
-        <h2>Calculation Results</h2>
-        <p><strong>Water Deficit:</strong> ${waterDeficitMm.toFixed(2)} mm</p>
-        <p><strong>Total Water Needed:</strong> ${totalWaterNeeded.toFixed(2)} mm/day</p>
-        <p><strong>Effective Water Requirement:</strong> ${effectiveWaterRequirement.toFixed(2)} mm/day</p>
-        <p><strong>Total Volume Needed:</strong> ${volumeNeeded.toFixed(2)} cubic meters</p>
-    `;
+        // Calculate total volume needed
+        const volumeNeeded = fieldSize * effectiveWaterRequirement;
+
+        // Display results
+        document.getElementById('result').innerHTML = `
+            <h2>Calculation Results</h2>
+            <p><strong>Water Deficit:</strong> ${waterDeficitMm.toFixed(2)} mm</p>
+            <p><strong>Total Water Needed:</strong> ${totalWaterNeeded.toFixed(2)} mm/day</p>
+            <p><strong>Effective Water Requirement:</strong> ${effectiveWaterRequirement.toFixed(2)} mm/day</p>
+            <p><strong>Total Volume Needed:</strong> ${volumeNeeded.toFixed(2)} cubic meters</p>
+        `;
+    } catch (error) {
+        document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+    }
 }
