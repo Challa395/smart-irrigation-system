@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Irrigation System</h1>
+        <form id="irrigationForm">
+            <label for="soilMoisture">Soil Moisture Level (%):</label>
+            <input type="number" id="soilMoisture" name="soilMoisture" required><br>
+
+            <label for="cropType">Crop Type:</label>
+            <select id="cropType" name="cropType">
+                <option value="wheat">Wheat</option>
+                <option value="rice">Rice</option>
+                <option value="maize">Maize</option>
+                <option value="cotton">Cotton</option>
+                <option value="soybean">Soybean</option>
+                <option value="sorghum">Sorghum</option>
+                <option value="barley">Barley</option>
+                <option value="sugarcane">Sugarcane</option>
+                <option value="groundnut">Groundnut</option>
+                <option value="millets">Millets</option>
+            </select><br>
+
+            <label for="fieldSize">Field Size (acres):</label>
+            <input type="number" id="fieldSize" name="fieldSize" required><br>
+
+            <label for="waterReq">Crop Water Requirement (mm/day):</label>
+            <input type="number" id="waterReq" name="waterReq" required><br>
+
+            <label for="soilType">Soil Type:</label>
+            <select id="soilType" name="soilType">
+                <option value="sandy">Sandy</option>
+                <option value="clay">Clay</option>
+                <option value="loamy">Loamy</option>
+                <option value="silty">Silty</option>
+                <option value="peaty">Peaty</option>
+            </select><br>
+
+            <label for="efficiency">Irrigation System Efficiency (%):</label>
+            <input type="number" id="efficiency" name="efficiency" required><br>
+
+            <button type="button" onclick="calculateIrrigation()">Calculate</button>
+        </form>
+
+        <h2>Results:</h2>
+        <p id="irrigationResult"></p>
+        <p id="waterDeficit"></p>
+        <p id="totalWaterNeeded"></p>
+        <p id="effectiveWaterRequirement"></p>
+        <p id="totalVolumeNeeded"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
