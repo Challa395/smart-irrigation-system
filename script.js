@@ -1,27 +1,24 @@
-// Function to simulate soil moisture monitoring
-function checkSoilMoisture() {
-    // Get the soil moisture input value from the user
-    let moistureLevel = document.getElementById("moistureInput").value;
+function calculateIrrigation() {
+    const soilMoisture = parseFloat(document.getElementById('soilMoisture').value);
+    const cropWaterRequirement = parseFloat(document.getElementById('cropWaterRequirement').value);
+    const fieldSize = parseFloat(document.getElementById('fieldSize').value);
+    const evapotranspiration = parseFloat(document.getElementById('evapotranspiration').value);
+    const irrigationEfficiency = parseFloat(document.getElementById('irrigationEfficiency').value) / 100;
+    const recentRainfall = parseFloat(document.getElementById('recentRainfall').value);
 
-    // Display feedback based on soil moisture levels
-    let resultText;
-    if (moistureLevel >= 70) {
-        resultText = "Soil moisture is high. No need to water the crops.";
-    } else if (moistureLevel >= 40) {
-        resultText = "Soil moisture is moderate. Consider watering soon.";
-    } else {
-        resultText = "Soil moisture is low. Watering the crops is necessary.";
-    }
+    const desiredMoistureLevel = 30; // assuming a constant desired moisture level for simplicity
+    const waterDeficit = Math.max(0, desiredMoistureLevel - soilMoisture);
+    const waterDeficitMm = waterDeficit * 100; // convert percentage to mm (assumed depth of 100 mm)
 
-    // Display the result in the webpage
-    document.getElementById("result").innerHTML = resultText;
+    const totalWaterNeeded = cropWaterRequirement + evapotranspiration - recentRainfall;
+    const effectiveWaterRequirement = totalWaterNeeded / irrigationEfficiency;
+    const volumeNeeded = fieldSize * effectiveWaterRequirement;
+
+    document.getElementById('result').innerHTML = `
+        <h2>Calculation Results</h2>
+        <p>Water Deficit: ${waterDeficitMm.toFixed(2)} mm</p>
+        <p>Total Water Needed: ${totalWaterNeeded.toFixed(2)} mm/day</p>
+        <p>Effective Water Requirement: ${effectiveWaterRequirement.toFixed(2)} mm/day</p>
+        <p>Total Volume Needed: ${volumeNeeded.toFixed(2)} cubic meters</p>
+    `;
 }
-
-// Function to display current date and time dynamically
-function displayDateTime() {
-    const now = new Date();
-    document.getElementById("dateTime").innerHTML = now.toLocaleString();
-}
-
-// Run the date/time function every second
-setInterval(displayDateTime, 1000);
