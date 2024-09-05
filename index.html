@@ -3,94 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Smart Irrigation System for Precision Farming">
     <title>Smart Irrigation System</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <div class="container">
         <h1>Smart Irrigation System for Precision Farming</h1>
-    </header>
-
-    <!-- Form Section -->
-    <section>
-        <h2>Provide Your Inputs</h2>
+        
         <form id="irrigation-form">
-            <label for="soil-moisture">Soil Moisture Level (0-100%):</label><br>
-            <input type="number" id="soil-moisture" name="soil-moisture" min="0" max="100" required><br><br>
+            <label for="soil-moisture">Soil Moisture Level (%):</label>
+            <input type="number" id="soil-moisture" name="soilMoisture" min="0" max="100" required>
 
-            <label for="crop-type">Crop Type:</label><br>
-            <select id="crop-type" name="crop-type">
+            <label for="crop-type">Crop Type:</label>
+            <select id="crop-type" name="cropType" required>
                 <option value="wheat">Wheat</option>
-                <option value="corn">Corn</option>
                 <option value="rice">Rice</option>
-            </select><br><br>
+                <option value="corn">Corn</option>
+            </select>
 
-            <label for="weather">Weather Condition:</label><br>
-            <select id="weather" name="weather">
+            <label for="water-level">Water Level in Field (liters):</label>
+            <input type="number" id="water-level" name="waterLevel" required>
+
+            <label for="weather-condition">Weather Condition:</label>
+            <select id="weather-condition" name="weatherCondition" required>
                 <option value="sunny">Sunny</option>
-                <option value="cloudy">Cloudy</option>
                 <option value="rainy">Rainy</option>
-            </select><br><br>
+                <option value="cloudy">Cloudy</option>
+            </select>
 
-            <input type="submit" value="Get Recommendation">
+            <button type="submit">Submit</button>
         </form>
-    </section>
 
-    <!-- Output Section -->
-    <section>
-        <h2>Recommendation</h2>
-        <p id="output"></p>
-    </section>
-
-    <footer>
-        <p>Created by [Your Name]</p>
-    </footer>
-
-    <!-- JavaScript Code for Processing Inputs -->
-    <script>
-        // Get references to the form and output elements
-        const form = document.getElementById('irrigation-form');
-        const output = document.getElementById('output');
-
-        // Function to handle form submission
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from refreshing the page
-
-            // Get the input values
-            const soilMoisture = document.getElementById('soil-moisture').value;
-            const cropType = document.getElementById('crop-type').value;
-            const weather = document.getElementById('weather').value;
-
-            // Call the function to get the recommendation
-            const recommendation = getIrrigationRecommendation(soilMoisture, cropType, weather);
-
-            // Display the recommendation
-            output.innerHTML = recommendation;
-        });
-
-        // Function to provide irrigation recommendations
-        function getIrrigationRecommendation(soilMoisture, cropType, weather) {
-            let recommendation = "";
-
-            // Logic for soil moisture
-            if (soilMoisture < 30) {
-                recommendation = "Soil is dry, irrigation is recommended.";
-            } else if (soilMoisture >= 30 && soilMoisture <= 70) {
-                recommendation = "Soil moisture is at a moderate level. Irrigation may be needed depending on the crop type and weather.";
-            } else {
-                recommendation = "Soil is sufficiently moist. No irrigation needed.";
-            }
-
-            // Additional logic based on crop type and weather
-            if (cropType === "rice" && weather === "sunny" && soilMoisture < 40) {
-                recommendation = "Rice requires a lot of water. It’s a good time to irrigate.";
-            } else if (weather === "rainy") {
-                recommendation = "No irrigation needed due to rain.";
-            }
-
-            return recommendation;
-        }
-    </script>
+        <div id="output">
+            <h2>Output:</h2>
+            <p id="irrigation-needed"></p>
+            <p id="water-required"></p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
