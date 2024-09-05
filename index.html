@@ -4,41 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Irrigation System</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Smart Irrigation System for Precision Farming</h1>
-    
-    <div id="input-form">
-        <label for="soil-moisture">Soil Moisture Level (%):</label>
-        <input type="number" id="soil-moisture" name="soil-moisture" min="0" max="100">
-        
-        <label for="crop-type">Select Crop Type:</label>
-        <select id="crop-type" name="crop-type">
+    <h1>Smart Irrigation System</h1>
+
+    <form id="irrigationForm">
+        <label for="soilMoisture">Soil Moisture Level (%):</label>
+        <input type="number" id="soilMoisture" name="soilMoisture" required>
+
+        <label for="cropType">Type of Crop:</label>
+        <select id="cropType" name="cropType" required>
             <option value="wheat">Wheat</option>
-            <option value="corn">Corn</option>
             <option value="rice">Rice</option>
+            <option value="corn">Corn</option>
+            <option value="soybeans">Soybeans</option>
             <option value="cotton">Cotton</option>
-            <option value="soybean">Soybean</option>
-            <option value="potato">Potato</option>
             <option value="sugarcane">Sugarcane</option>
-            <option value="tomato">Tomato</option>
             <option value="barley">Barley</option>
-            <option value="sorghum">Sorghum</option>
+            <option value="tomatoes">Tomatoes</option>
+            <option value="potatoes">Potatoes</option>
+            <option value="lettuce">Lettuce</option>
         </select>
-        
+
         <label for="weather">Weather Condition:</label>
-        <select id="weather" name="weather">
+        <select id="weather" name="weather" required>
             <option value="sunny">Sunny</option>
             <option value="cloudy">Cloudy</option>
             <option value="rainy">Rainy</option>
         </select>
 
-        <label for="area">Area (Square Feet):</label>
-        <input type="number" id="area" name="area" min="1">
+        <label for="area">Area (square feet):</label>
+        <input type="number" id="area" name="area" required>
 
-        <button onclick="calculate()">Calculate Irrigation</button>
-    </div>
+        <button type="submit">Calculate</button>
+    </form>
 
     <div id="result"></div>
 
