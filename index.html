@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Smart Irrigation System</h1>
+    </header>
+
+    <main>
+        <section id="input-section">
+            <h2>Enter Input Data</h2>
+            <form id="irrigation-form">
+                <label for="soil-moisture">Soil Moisture (%)</label>
+                <input type="number" id="soil-moisture" name="soil-moisture" step="0.1" min="0" max="100" required>
+
+                <label for="weather-forecast">Weather Forecast (Rainfall in mm)</label>
+                <input type="number" id="weather-forecast" name="weather-forecast" step="0.1" min="0" max="200" required>
+
+                <label for="crop-type">Crop Type</label>
+                <input type="text" id="crop-type" name="crop-type" required>
+
+                <label for="growth-stage">Growth Stage</label>
+                <input type="text" id="growth-stage" name="growth-stage" required>
+
+                <button type="button" onclick="generateOutputs()">Generate Outputs</button>
+            </form>
+        </section>
+
+        <section id="output-section">
+            <h2>Output Data</h2>
+            <div id="irrigation-schedule"></div>
+            <div id="water-application"></div>
+            <div id="soil-moisture-output"></div>
+            <div id="weather-forecast-output"></div>
+        </section>
+    </main>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
