@@ -1,41 +1,61 @@
-document.getElementById("irrigation-form").addEventListener("submit", function(event) {
-    event.preventDefault();
+document.getElementById("irrigationForm").addEventListener("submit", function(event) {
+  event.preventDefault();
 
-    const soilMoisture = document.getElementById("soil-moisture").value;
-    const cropType = document.getElementById("crop-type").value;
-    const waterLevel = document.getElementById("water-level").value;
-    const weatherCondition = document.getElementById("weather-condition").value;
+  // Input values
+  const soilMoisture = parseFloat(document.getElementById("soilMoisture").value);
+  const cropType = document.getElementById("cropType").value;
+  const weatherCondition = document.getElementById("weatherCondition").value;
+  const area = parseFloat(document.getElementById("area").value);
 
-    let irrigationNeeded;
-    let waterRequired;
+  let irrigationNeeded = false;
+  let waterAmount = 0;
 
-    // Logic to determine irrigation needs
-    if (soilMoisture < 40 && weatherCondition !== "rainy") {
-        irrigationNeeded = "Yes, irrigation is needed.";
-    } else {
-        irrigationNeeded = "No irrigation needed at the moment.";
+  // Logic for determining irrigation
+  if (soilMoisture < 50) {  // If soil moisture is below 50%, irrigation is needed
+    irrigationNeeded = true;
+
+    // Water amount based on crop type and area
+    switch (cropType) {
+      case "wheat": waterAmount = 0.6; break;
+      case "corn": waterAmount = 0.8; break;
+      case "rice": waterAmount = 1.0; break;
+      case "soybean": waterAmount = 0.7; break;
+      case "cotton": waterAmount = 0.9; break;
+      case "barley": waterAmount = 0.65; break;
+      case "oats": waterAmount = 0.6; break;
+      case "sunflower": waterAmount = 0.75; break;
+      case "potato": waterAmount = 1.2; break;
+      case "sugarcane": waterAmount = 1.5; break;
     }
 
-    // Logic to calculate water required
-    switch(cropType) {
-        case "wheat":
-            waterRequired = soilMoisture < 40 ? 50 : 0; // in liters
-            break;
-        case "rice":
-            waterRequired = soilMoisture < 40 ? 70 : 0; // in liters
-            break;
-        case "corn":
-            waterRequired = soilMoisture < 40 ? 60 : 0; // in liters
-            break;
-        default:
-            waterRequired = 0;
+    // Weather adjustment
+    switch (weatherCondition) {
+      case "rainy":
+        waterAmount *= 0.5;
+        break;
+      case "mostlyCloudy":
+        waterAmount *= 0.75;
+        break;
+      case "slightlySunny":
+        waterAmount *= 1.0;
+        break;
+      case "sunny":
+        waterAmount *= 1.25;
+        break;
+      case "stormy":
+        waterAmount *= 0.25;
+        break;
     }
 
-    if (waterLevel < waterRequired) {
-        irrigationNeeded += " However, insufficient water in the field.";
-    }
+    // Calculate total water amount based on area
+    waterAmount = waterAmount * area;
+  }
 
-    // Display results
-    document.getElementById("irrigation-needed").textContent = irrigationNeeded;
-    document.getElementById("water-required").textContent = Water required: ${waterRequired} liters;
+  // Display the result
+  const resultDiv = document.getElementById("result");
+  if (irrigationNeeded) {
+    resultDiv.innerHTML = <p>Irrigation is needed. Use <strong>${waterAmount.toFixed(2)} liters</strong> of water for the area.</p>;
+  } else {
+    resultDiv.innerHTML = "<p>No irrigation needed at this time.</p>";
+  }
 });
